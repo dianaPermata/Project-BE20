@@ -73,11 +73,16 @@ module.exports = {
   updateDoctorByID: async (req, res) => {
     try {
       const doctors = await Doctor.findById(req.params.id, "-__v")
+      const data = req.body
 
-      Object.assign(users, req.body)
+      const saltRounds = 10
+      const hash = bcrypt.hashSync(data.password, saltRounds);
+      data.password = hash
+
+      Object.assign(doctors, req.body)
       doctors.save();
       res.status(201).send({ 
-        message : "User updated!",
+        message : "Doctors updated!",
         data : doctors })
    
     } catch (error) {
@@ -87,14 +92,16 @@ module.exports = {
 
   doctorLogin: async (req, res) => {
     const data = req.body
-    const doctor = await Doctor.findOne({email: data.email})  
-    const checkPwd = bcrypt.compareSync(data.password, doctor.password)
+    const doctor = await Doctor.findOne({email: data.email})
+    const id = doctor._id  
+    const isValid = bcrypt.compareSync(data.password, doctor.password)
     const token = jwt.sign({doctor}, process.env.DOCTOR_KEY)
 
-    if (checkPwd) {
-      res.header('doctor-token',token).status(200).json({
+    if (isValid) {
+      res.header('doctor-token',token,id).status(200).json({
         message: "Login Succesfull!",
-        token 
+        token,
+        id
       })
     } else {
       res.status(400).json({
