@@ -29,6 +29,7 @@ const doctorAuth = (req, res, next) => {
         });
     }
 }
+
 const doctorAuthArticle = (req, res, next) => {
     const token = req.header('doctor-token')
     if(!token) 

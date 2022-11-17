@@ -93,7 +93,7 @@ module.exports = {
   doctorLogin: async (req, res) => {
     const data = req.body
     const doctor = await Doctor.findOne({email: data.email})
-    const id = doctor._id  
+    const id = doctor._id
     const isValid = bcrypt.compareSync(data.password, doctor.password)
     const token = jwt.sign({doctor}, process.env.SECRET_KEY)
 
