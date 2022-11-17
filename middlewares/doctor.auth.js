@@ -7,9 +7,9 @@ const doctorAuth = (req, res, next) => {
     return res.status(403).json({
         status : res.statusCode,
         message : "Access Denied!"
-    }) 
+    }); 
     try{
-        const verified = jwt.verify(token, process.env.DOCTOR_KEY)
+        const verified = jwt.verify(token, process.env.SECRET_KEY)
         // console.log(verified.doctor._id);
         if (!verified) {
             res.status(401).send({
@@ -19,14 +19,14 @@ const doctorAuth = (req, res, next) => {
           return res.status(403).json({
               status : res.statusCode,
               message : "Access Denied!"
-          }) //Checks doctor's id currently logged in is the same as req.params.id
+          }); //Checks doctor's id currently logged in is the same as req.params.id
         }
           next()
     }catch(error){
         res.status(400).json({
             status : res.statusCode,
             message : "Invalid Token!"
-        })
+        });
     }
 }
 const doctorAuthArticle = (req, res, next) => {
@@ -35,9 +35,9 @@ const doctorAuthArticle = (req, res, next) => {
     return res.status(403).json({
         status : res.statusCode,
         message : "Access Denied!"
-    }) 
+    });
     try{
-        const verified = jwt.verify(token, process.env.DOCTOR_KEY)
+        const verified = jwt.verify(token, process.env.SECRET_KEY)
         // console.log(verified.doctor._id);
         if (!verified) {
             res.status(401).send({
@@ -47,14 +47,14 @@ const doctorAuthArticle = (req, res, next) => {
           return res.status(403).json({
               status : res.statusCode,
               message : "Access Denied!"
-          }) //Checks doctor's id currently logged in is the same as req.params.id
+          }); //Checks doctor's id currently logged in is the same as req.params.id
         }
           next()
     }catch(error){
         res.status(400).json({
             status : res.statusCode,
             message : "Invalid Token!"
-        })
+        });
     }
 }
 
