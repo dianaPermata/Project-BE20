@@ -38,11 +38,9 @@ module.exports = {
 
   registerDoctor: (req, res) => {
     const data = req.body
-
     const saltRounds = 10
     const hash = bcrypt.hashSync(data.password, saltRounds);
     data.password = hash
-
     const doctor = new Doctor(data)
 
     doctor.save()
