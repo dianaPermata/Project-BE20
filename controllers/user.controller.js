@@ -1,7 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const Doctor = require("../models/user");
 const User = require('../models/user');
 
 module.exports = {
@@ -39,18 +38,29 @@ module.exports = {
     },
 
     registerUser: (req, res) => {
-        const data = req.body
+        try {
+            const data = req.body 
+            const saltRounds = 10
+            const hash = bcrypt.hashSync(data.password, saltRounds);
+            data.password = hash
 
-        const saltRounds = 10
-        const hash = bcrypt.hashSync(data.password, saltRounds);
-        data.password = hash
+            const user = new User(data)
 
-        const user = new User(data)
+            user.save()
+            res.status(201).send(user);
+            res.json({ success: true, message: "User saved successfuly!!" });
+        } catch (error) {
+            if (error.name === "ValidationError") {
+                let errors = {};
 
-        user.save()
-        res.status(201).json({
-            message: "Succes Register!",
-        })
+                Object.keys(error.errors).forEach((key) => {
+                    errors[key] = error.errors[key].message;
+                });
+
+                return res.status(400).send(errors);
+            }
+            res.status(500).send("Something went wrong");
+        }
     },
 
     deleteUserByID: async (req, res) => {
@@ -85,7 +95,6 @@ module.exports = {
                 message: "User updated!",
                 data: user
             })
-
         } catch (error) {
             res.status(500).json({ message: "Server Error" })
         }

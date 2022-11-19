@@ -14,7 +14,7 @@ const doctorAuth = (req, res, next) => {
         // console.log(verified.doctor._id);
         if (!verified) {
             res.status(401).send({
-              message: "Unauthorized!",
+                message: "Unauthorized!",
             });
           }else if(verified.doctor._id != req.params.id){
           return res.status(403).json({
@@ -22,8 +22,8 @@ const doctorAuth = (req, res, next) => {
               message : "Access Denied!"
           }); //Checks doctor's id currently logged in is the same as req.params.id
         }
-          next()
-    }catch(error){
+        next()
+    } catch (error) {
         res.status(400).json({
             status : res.statusCode,
             message : "Invalid Token!"

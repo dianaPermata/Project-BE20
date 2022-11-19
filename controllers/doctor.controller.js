@@ -42,11 +42,15 @@ module.exports = {
     const hash = bcrypt.hashSync(data.password, saltRounds);
     data.password = hash
     const doctor = new Doctor(data)
-
-    doctor.save()
-    res.status(201).json({
-      message: "Register Succes!",
-    })
+    try{
+      doctor.save()
+      res.status(201).json({
+        message: "Register Succes!"
+      })
+    }catch(err){
+      res.status(500).json({ message: "Server Error" });
+    }
+ 
   },
 
   deleteDoctorByID: async (req, res) => {

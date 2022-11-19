@@ -36,8 +36,17 @@ module.exports = {
   },
 
   addArticle: (req, res) => {
-    const newArticle = req.body
-    const article = new Article(newArticle)
+    const token = req.header('doctor-token')
+    const verified = jwt.verify(token, process.env.SECRET_KEY)
+
+    const article = new Article({
+      title : req.body.title,
+      category : req.body.category,
+      content : req.body.content,
+      date : req.body.date,
+      writter : verified.doctor._id
+    })
+    //writter is taken according to the token that has been entered in the header
 
     article.save()
     res.status(201).json({
@@ -66,7 +75,7 @@ module.exports = {
 
   updateArticleByID: async (req, res) => {
     try {
-      const article = await Article.findById(req.params.id, "-__v")
+      const article = await Article.findById(req.params.id, "-__v").populate("writter", "name")
 
       Object.assign(article, req.body)
       article.save();
