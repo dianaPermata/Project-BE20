@@ -44,23 +44,10 @@ module.exports = {
             const hash = bcrypt.hashSync(data.password, saltRounds);
             data.password = hash
 
-            const user = new User(data)
-
-            user.save()
-            res.status(201).send(user);
-            res.json({ success: true, message: "User saved successfuly!!" });
-        } catch (error) {
-            if (error.name === "ValidationError") {
-                let errors = {};
-
-                Object.keys(error.errors).forEach((key) => {
-                    errors[key] = error.errors[key].message;
-                });
-
-                return res.status(400).send(errors);
-            }
-            res.status(500).send("Something went wrong");
-        }
+    res.status(200).send(user);
+} catch (error) {
+  res.status(400).send(error);
+}
     },
 
     deleteUserByID: async (req, res) => {
@@ -98,7 +85,7 @@ module.exports = {
         } catch (error) {
             res.status(500).json({ message: "Server Error" })
         }
-    },
+    xcfn}, 
 
     userLogin: async (req, res) => {
         const data = req.body
@@ -109,7 +96,7 @@ module.exports = {
         if (checkPwd) {
             res.header('user-token', token).status(200).json({
                 message: "Login Succesfull!",
-                token,
+                token
             })
         } else {
             res.status(400).json({
