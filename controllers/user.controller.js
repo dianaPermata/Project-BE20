@@ -39,7 +39,7 @@ module.exports = {
 
     registerUser: (req, res) => {
         try {
-            const data = req.body
+            const data = req.body 
             const saltRounds = 10
             const hash = bcrypt.hashSync(data.password, saltRounds);
             data.password = hash

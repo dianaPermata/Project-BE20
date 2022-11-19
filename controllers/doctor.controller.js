@@ -9,7 +9,7 @@ module.exports = {
       const doctors = await Doctor.find({}, "-__v")
       
       res.status(200).json({
-        message: "Getting Data",
+        message: "Get Doctors Data",
         data: doctors
       })
     } catch (error) {
@@ -38,17 +38,19 @@ module.exports = {
 
   registerDoctor: (req, res) => {
     const data = req.body
-
     const saltRounds = 10
     const hash = bcrypt.hashSync(data.password, saltRounds);
     data.password = hash
-
     const doctor = new Doctor(data)
-
-    doctor.save()
-    res.status(201).json({
-      message: "Succes Register!",
-    })
+    try{
+      doctor.save()
+      res.status(201).json({
+        message: "Register Succes!"
+      })
+    }catch(err){
+      res.status(500).json({ message: "Server Error" });
+    }
+ 
   },
 
   deleteDoctorByID: async (req, res) => {
@@ -82,7 +84,7 @@ module.exports = {
       Object.assign(doctors, req.body)
       doctors.save();
       res.status(201).send({ 
-        message : "Doctors updated!",
+        message : "Doctor's Profile Updated!",
         data : doctors })
    
     } catch (error) {
@@ -95,7 +97,7 @@ module.exports = {
     const doctor = await Doctor.findOne({email: data.email})
     const id = doctor._id
     const isValid = bcrypt.compareSync(data.password, doctor.password)
-    const token = jwt.sign({doctor}, process.env.DOCTOR_KEY)
+    const token = jwt.sign({doctor}, process.env.SECRET_KEY)
 
     if (isValid) {
       res.header('doctor-token',token,id).status(200).json({
