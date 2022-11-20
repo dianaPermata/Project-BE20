@@ -77,8 +77,8 @@ Serves for enter the apps.
 
 ```
 {
-    "email":"dianapermata@gmail.com",
-    "password":"diana942",
+    "email":String,
+    "password":String,
 }
 ```
 
@@ -87,8 +87,8 @@ Serves for enter the apps.
 ```
 {
     "message": "Login Succesfull!",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzN2E4NmRiODJlMmU5ZmU2YmYxYjBmMCIsImVtYWlsIjoiZGlhbmFwZXJtYXRhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDRtTW5kdTZnOUpROElaUkR6cjkwRE9sZDViR2J4dFlIaE9yOHV1TnU3R1BiRDhlYmFVa0IuIiwicGhvbmUiOiIwODEyMTYwNjA1NDYiLCJfX3YiOjB9LCJpYXQiOjE2Njg5NzQzNjV9.P4nCuHkuLluNXxP7FmQJr5sEOLJ8RdwJtxBFHzBUlgw",
-    "id": "637a86db82e2e9fe6bf1b0f0"
+     token,
+    id,
 }
 ```
 
