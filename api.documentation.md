@@ -30,7 +30,7 @@ npm install
 npm run dev
 ```
 
-# **APIs Specifications**
+# **APIs Documentations**
 
 ## **Users**
 
