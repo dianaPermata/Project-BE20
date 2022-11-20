@@ -9,7 +9,7 @@ module.exports = {
             const user = await User.find({}, "-__v")
 
             res.status(200).json({
-                message: "Getting Data",
+                message: "Getting Data User",
                 data: user
             })
         } catch (error) {

@@ -44,18 +44,26 @@ Serves for creating new users.
 
 ```
 {
-        "name": String,
-        "email": String,
-        "password": String,
-        "phone": String
+    "nama":"diana permata putri",
+    "email":"dianapermata@gmail.com",
+    "password":"diana942",
+    "phone":"081216060546"
 }
 ```
-
-- Response
+  
+- Response succes :
 
 ```
 {
-        "message": "User saved successfuly!!"
+         "message": "Register Succes!"
+}
+```
+
+- response failed : 
+
+```
+{
+  "message":"server error"
 }
 ```
 
@@ -69,17 +77,27 @@ Serves for enter the apps.
 
 ```
 {
-    "email":"string",
-    "password": "string"
+    "email":"dianapermata@gmail.com",
+    "password":"diana942",
 }
 ```
 
-- Response:
+- Response succes:
 
 ```
 {
-          "message": "Login Succesfull!",
-          "token",
+    "message": "Login Succesfull!",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzN2E4NmRiODJlMmU5ZmU2YmYxYjBmMCIsImVtYWlsIjoiZGlhbmFwZXJtYXRhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDRtTW5kdTZnOUpROElaUkR6cjkwRE9sZDViR2J4dFlIaE9yOHV1TnU3R1BiRDhlYmFVa0IuIiwicGhvbmUiOiIwODEyMTYwNjA1NDYiLCJfX3YiOjB9LCJpYXQiOjE2Njg5NzQzNjV9.P4nCuHkuLluNXxP7FmQJr5sEOLJ8RdwJtxBFHzBUlgw",
+    "id": "637a86db82e2e9fe6bf1b0f0"
+}
+```
+
+
+response failed : 
+
+```
+{
+  "message":"wrong Password or email"
 }
 ```
 
@@ -90,22 +108,29 @@ Serves to get all user
 - method : GET
 - Endpoint: /user/
 - HTTP Header :
-- Response :
+- Response succes:
 
 ```
 {
-  "message": "Getting Data",
-  "data": [
-    {
-      "_id": "ObjectId",
-      "name": "string",
-      "email": "string",
-      "password": "string',
-      "phone": "string"
-    }
-]
+    "message": "Getting Data User",
+    "data": [
+     {
+        "_id": "637a86db82e2e9fe6bf1b0f0",
+        "email": "dianapermata@gmail.com",
+        "password": "$2b$10$4mMndu6g9JQ8IZRDzr90DOld5bGbxtYHhOr8uuNu7GPbD8ebaUkB.",
+        "phone": "081216060546"
+      }
+    ]
 }
 ```
+response failed : 
+
+```
+{
+  "message":"server error"
+}
+```
+
 ### D. Get User By ID
 
 Serves to get User by ID
@@ -113,24 +138,39 @@ Serves to get User by ID
 - method : GET
 - Endpoint: /user/:id
 - HTTP Header:
-- Response:
+- Response succes:
 
 ```
 {
-  "message": "You Searched for",
-  "data": {
-      "_id": "ObjectId",
-      "name": "string",
-      "email": "string",
-      "password": "string',
-      "phone": "string"
-  }
+   "message": "You Searched for",
+    "data": {
+      "_id": "637a86db82e2e9fe6bf1b0f0",
+      "email": "dianapermata@gmail.com",
+      "password": "$2b$10$4mMndu6g9JQ8IZRDzr90DOld5bGbxtYHhOr8uuNu7GPbD8ebaUkB.",
+      "phone": "081216060546"
+    }
+}
+```
+
+response failed : 
+
+```
+{
+  "message":"Could not found"
 }
 ```
 
 ### E. Update User By ID
 
 Serves to update todo by ID
+
+- Login by user first
+- User can be updated by himself
+- Method : PATCH
+- Endpoint: /user/:id
+- HTTP Header:
+  - user-token: `token`
+- Must confirm password
 
 - Method : PATCH
 - Endpoint: /user/:id
@@ -146,32 +186,52 @@ Serves to update todo by ID
 - Response :
 
 ```
-    {
-  "message": "User updated",
-  "data": {
-      "_id": "ObjectId",
-      "name": "updated name",
-      "email": "string",
-      "password": "string',
-      "phone": "string"
+  {
+      "message": "User updated!",
+      "data": {
+       "_id": "637a86db82e2e9fe6bf1b0f0",
+      "email": "dianapermata@gmail.com",
+      "password": "$2b$10$qR5BYVt96JPOpsHdyr/t8erdamWO349tqvhekIzJ7.z1yuNdE3SYC",
+      "phone": "081216060546"
+      }
   }
+```
+
+response failed : 
+
+```
+{
+  "message":"server error"
 }
 ```
 ### F. Delete User By ID
 
 Serves to delete user by ID
 
+- Login by user first
+- User can be deleted by himself
 - Method : DELETE
 - Endpoint: /user/:id
 - HTTP Header:
-- Response :
+  - user-token: `token`
+
+- Method : DELETE
+- Endpoint: /user/:id
+- HTTP Header:
+- Response succes :
 
 ```
 {
   "message": "Data Deleted"
 }
 ```
+- response failed : 
 
+```
+{
+  "message":"server error"
+}
+```
 
 ## **Doctors**
 
@@ -182,7 +242,7 @@ Serves to get all doctor
 - method : GET
 - Endpoint: /doctor/
 - HTTP Header :
-- Response :
+- Response succes:
 
 ```
 {
@@ -201,6 +261,14 @@ Serves to get all doctor
     }
 ```
 
+- response failed : 
+
+```
+{
+  "message":"server error"
+}
+```
+
 ### B. Get Doctor By ID
 
 Serves to get Doctor by ID
@@ -208,7 +276,7 @@ Serves to get Doctor by ID
 - method : GET
 - Endpoint: /doctor/:id
 - HTTP Header:
-- Response:
+- Response succes :
 
 ```
 {
@@ -227,6 +295,14 @@ Serves to get Doctor by ID
 }
 ```
 
+- response failed : 
+
+```
+{
+  "message":"Could not found"
+}
+```
+
 ### C. Login
 
 Serves for doctor login to get token for acces add/update/delete article.
@@ -242,12 +318,20 @@ Serves for doctor login to get token for acces add/update/delete article.
 }
 ```
 
-- Response:
+- Response succes :
 
 ```
 {
           "message": "Login Succesfull!",
           "token",
+}
+```
+
+- response failed : 
+
+```
+{
+  "message":"Wrong password and email"
 }
 ```
 
@@ -270,7 +354,7 @@ Serves to update doctor by ID
 }
 
 ```  
-- Response :
+- Response succes :
 
 ```
     {
@@ -289,6 +373,14 @@ Serves to update doctor by ID
 }
 ```
 
+- response failed : 
+
+```
+{
+  "message":"server error"
+}
+```
+
 ### E. Delete Doctor By ID
 
 Serves to delete Doctor by ID
@@ -299,11 +391,19 @@ Serves to delete Doctor by ID
 - Endpoint: /doctor/:id
 - HTTP Header:
   - doctor-token: `token`
-- Response :
+- Response succes :
 
 ```
 {
   "message": "Data Deleted!"
+}
+```
+
+- response failed : 
+
+```
+{
+  "message":"server error"
 }
 ```
 
@@ -329,10 +429,18 @@ serves to register doctor
 }
 ```
 
-- Response
+- Response succes :
 ```
 {
   "message": "Register Succes!"
+}
+```
+
+- response failed : 
+
+```
+{
+  "message":"server error"
 }
 ```
 
@@ -345,7 +453,7 @@ Serves to get all article
 - method : GET
 - Endpoint: /article/
 - HTTP Header :
-- Response :
+- Response succes :
 
 ```
 {
@@ -366,6 +474,14 @@ Serves to get all article
 }
 ```
 
+- response failed : 
+
+```
+{
+  "message":"server error"
+}
+```
+
 ### B. Get Article By ID
 
 Serves to get article by ID
@@ -373,7 +489,7 @@ Serves to get article by ID
 - method : GET
 - Endpoint: article/:id
 - HTTP Header:
-- Response:
+- Response succes :
 
 ```
 {
@@ -389,6 +505,13 @@ Serves to get article by ID
       "name": "updated name"
     }
   }
+}
+```
+- response failed : 
+
+```
+{
+  "message":"server error"
 }
 ```
 
@@ -409,7 +532,7 @@ Serves to update article by ID
 }
 
 ```  
-- Response :
+- Response succes :
 
 ```
  {
@@ -427,6 +550,13 @@ Serves to update article by ID
   }
 }
 ```
+- response failed : 
+
+```
+{
+  "message":"server error"
+}
+```
 
 ### D. Delete Article By ID
 
@@ -438,11 +568,19 @@ Serves to deleted article by ID
 - Endpoint: article/:id
 - HTTP Header:
   - doctor-token: `token`
-- Response :
+- Response succes :
 
 ```
 {
   "message": "Article Deleted!"
+}
+```
+
+- response failed : 
+
+```
+{
+  "message":"server error"
 }
 ```
 
