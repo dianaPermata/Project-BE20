@@ -64,7 +64,7 @@ module.exports = {
     } else{
       doctors.deleteOne()
       res.status(201).json(
-        {message: "Data Deleted"
+        {message: "Data Deleted!"
       })
     }
     } catch (error) {
