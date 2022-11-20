@@ -6,7 +6,7 @@ module.exports = {
   getAllArticle: async (req, res) => {
     try {
       const articles = await Article.find({}, "-__v").populate("writter", "name")
-      
+
       res.status(200).json({
         message: "Get Articles Data",
         data: articles
@@ -16,20 +16,20 @@ module.exports = {
     }
   },
 
-  getArticleByID: async (req, res) => {    
+  getArticleByID: async (req, res) => {
     try {
       const articles = await Article.findById(req.params.id, "-__v").populate("writter", "name")
 
-      if(!articles){
+      if (!articles) {
         res.status(404).json({
-          message : "Could not Found"
+          message: "Could not Found"
         });
-    } else{
-      res.status(200).json({
-        message: "You Searched for",
-        data: articles
-      })
-    }
+      } else {
+        res.status(200).json({
+          message: "You Searched for",
+          data: articles
+        })
+      }
     } catch (error) {
       res.status(500).json({ message: "Server Error" })
     }
@@ -40,11 +40,11 @@ module.exports = {
     const verified = jwt.verify(token, process.env.SECRET_KEY)
 
     const article = new Article({
-      title : req.body.title,
-      category : req.body.category,
-      content : req.body.content,
-      date : req.body.date,
-      writter : verified.doctor._id
+      title: req.body.title,
+      category: req.body.category,
+      content: req.body.content,
+      date: req.body.date,
+      writter: verified.doctor._id
     })
     //writter is taken according to the token that has been entered in the header
 
@@ -58,16 +58,17 @@ module.exports = {
     try {
       const articles = await Article.findById(req.params.id, "-__v")
 
-      if(!articles){
+      if (!articles) {
         res.status(404).json({
-          message : "Could not Found"
+          message: "Could not Found"
         });
-    } else{
-      articles.deleteOne()
-      res.status(201).json(
-        {message: "Article Deleted!"
-      })
-    }
+      } else {
+        articles.deleteOne()
+        res.status(201).json(
+          {
+            message: "Article Deleted!"
+          })
+      }
     } catch (error) {
       res.status(500).json({ message: "Server Error" })
     }
@@ -79,11 +80,12 @@ module.exports = {
 
       Object.assign(article, req.body)
       article.save();
-      res.status(201).send({ 
-        message : "Article Updated!",
-        data : article })
-      
-   
+      res.status(201).send({
+        message: "Article Updated!",
+        data: article
+      })
+
+
     } catch (error) {
       res.status(500).json({ message: "Server Error" })
     }

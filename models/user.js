@@ -4,7 +4,7 @@ const validator = require("validator");
 
 const userSchema = new Schema(
     {
-        name: String,
+        nama: String,
         email: String,
         password: String,
         phone: Number,
