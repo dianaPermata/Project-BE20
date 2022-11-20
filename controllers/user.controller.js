@@ -39,21 +39,10 @@ module.exports = {
 
     registerUser: (req, res) => {
         try {
-            const data = req.body
-                            const saltRounds = 10
-                        const hash = bcrypt.hashSync(data.password, saltRounds);
-                        data.password = hash
-                
-                            const user = new User(data)
-                
-                            user.save()
-                                res.status(201).send(user);
-    //                         res.json({ success: true, message: "User saved successfuly!!" })
-    //     } catch (error) {
-    //         res.status(400).send({
-    //             message:error.message);
-    //         }
-    // },
+            const data = req.body 
+            const saltRounds = 10
+            const hash = bcrypt.hashSync(data.password, saltRounds);
+            data.password = hash
 
     res.status(200).send(user);
 } catch (error) {
