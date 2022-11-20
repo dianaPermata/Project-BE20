@@ -77,8 +77,8 @@ Serves for enter the apps.
 
 ```
 {
-    "email":String,
-    "password":String,
+    "email":"string",
+    "password":"string",
 }
 ```
 
@@ -179,7 +179,8 @@ Serves to update todo by ID
 - Body : 
 ```
 {
-  "name" : "updated name"
+  "name" : "updated name",
+  "password":"string"
 }
 
 ```  
