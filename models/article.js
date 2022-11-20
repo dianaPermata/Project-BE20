@@ -9,8 +9,7 @@ const articleSchema = new Schema({
   writter : {
     type: mongoose.ObjectId,
     ref: "Doctor"
-  }
-
+  },
 })
 
 const Article = mongoose.model("Article", articleSchema)
