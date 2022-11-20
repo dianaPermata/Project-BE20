@@ -1,6 +1,5 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const Article = require("../models/article");
 
 const doctorAuth = (req, res, next) => {
     const token = req.header('doctor-token')
