@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getAllUser,
-  getUserByID,
-  registerUser,
-  deleteUserByID,
-  updateUserByID,
-  userLogin
+    getAllUser,
+    getUserByID,
+    registerUser,
+    deleteUserByID,
+    updateUserByID,
+    userLogin
 } = require("../controllers/user.controller");
 const verifyToken = require("../middlewares/user.auth");
 
