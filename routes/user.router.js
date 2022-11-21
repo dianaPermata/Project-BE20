@@ -14,13 +14,8 @@ const verifyToken = require("../middlewares/user.auth");
 router.get("/", getAllUser);
 router.get("/:id", getUserByID);
 router.post("/register", registerUser);
-<<<<<<< HEAD
-router.delete("/:id",deleteUserByID);
-router.patch("/:id", updateUserByID);
-=======
 router.delete("/:id", verifyToken, deleteUserByID);
 router.patch("/:id", verifyToken, updateUserByID);
->>>>>>> dev
 router.post("/login", userLogin);
 
 module.exports = router;
