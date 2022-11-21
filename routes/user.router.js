@@ -13,7 +13,7 @@ const {
 router.get("/", getAllUser);
 router.get("/:id", getUserByID);
 router.post("/register", registerUser);
-router.delete("/:id", deleteUserByID);
+router.delete("/:id",deleteUserByID);
 router.patch("/:id", updateUserByID);
 router.post("/login", userLogin);
 
